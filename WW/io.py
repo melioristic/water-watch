@@ -1,10 +1,21 @@
 import geopandas as gpd
-import xarray as xr
 import rioxarray as rxr
+import matplotlib.pylab as plt
 
-rain_nc = 'data'
-temp_fname = 'Tair_WFDE5_CRU_dly_v1.0.nc' 
+temp_max_b = 'data/temp_max/Maxtemp_MaxT_2011.GRD'
 
-xds = xr.open_dataset(
-    "3B-DAY.MS.MRG.3IMERG.20170216-S000000-E235959.V06.nc4",)
+with open(temp_max_b, 'rb') as f:
+    print(f.readline().decode()) 
+
+
+
+# xds = rxr.open_rasterio(
+#     "data/temp_max/Bangalore.shp",
+#     masked=True,
+# )
+
+# xds.plot()
+# plt.savefig('plots/banglore.png')
+
+# temp_fname = 'Tair_WFDE5_CRU_dly_v1.0.nc' 
 
