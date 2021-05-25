@@ -1,21 +1,31 @@
 import geopandas as gpd
 import rioxarray as rxr
 import matplotlib.pylab as plt
+from shapely.geometry import mapping
+
 
 temp_max_b = 'data/temp_max/Maxtemp_MaxT_2011.GRD'
+shp_file = 'data/shapefiles/hydrobasin6_Bangalore_clip_HYBAS_ID_4061139430.0.shp'
 
-with open(temp_max_b, 'rb') as f:
-    print(f.readline().decode()) 
+xds = rxr.open_rasterio(
+    "data/temp_max/Maxtemp_MaxT_2011.nc",
+    masked=True,
+)
+xds.rio.set_crs(4326)
+xds[0].plot()
+plt.savefig('plots/temp.png')
+plt.close()
 
 
+geodf = gpd.read_file(shp_file)
+print(geodf.crs)
+geodf.plot()
+plt.savefig('plots/shp.png')
+plt.close()
 
-# xds = rxr.open_rasterio(
-#     "data/temp_max/Bangalore.shp",
-#     masked=True,
-# )
+clipped = xds.rio.clip(geodf.geometry.apply(mapping), geodf.crs)
 
-# xds.plot()
-# plt.savefig('plots/banglore.png')
-
-# temp_fname = 'Tair_WFDE5_CRU_dly_v1.0.nc' 
+clipped.plot()
+plt.savefig('plots/clip.png')
+plt.close()
 
