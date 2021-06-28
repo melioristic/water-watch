@@ -21,11 +21,6 @@ def read_temp(var, catchment = 'catch_1'):
 
     return data
 
-def read_met(fname = 'data/met_v1_0.csv'):
-
-    return pd.read_csv(fname)
-
-def read_reservoir(res_name = 'Harangi'):
-    fname = 'data/reservoir/'+res_name+'.csv'
+def read_csv(fname = 'data/met_v1_0.csv'):
 
     return pd.read_csv(fname)
